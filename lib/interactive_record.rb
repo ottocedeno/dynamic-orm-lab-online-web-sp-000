@@ -11,9 +11,7 @@ class InteractiveRecord
     DB[:conn].results_as_hash = true
     sql = "PRAGMA table_info('#{self.table_name}')"
     column_data = DB[:conn].execute(sql)
-    column_data.map do |col|
-      col["name"]
-    end
+    column_data.map {|col| col["name"]}.compact
   end
 
   def initialize(options={})
